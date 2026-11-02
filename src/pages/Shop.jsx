@@ -70,46 +70,42 @@ export default function Shop() {
 
   const current = categories.find((c) => c.id === cat) || categories[0];
   const title = fav && cat === 'toate' ? 'Produsele tale favorite' : current.title;
-  const showHero = cat === 'toate' && !chips.length;
 
   return (
     <main>
-      {showHero && (
-        <>
-          <section className={s.hero}>
-            <div className={`container ${s.heroInner}`}>
-              <div className={s.heroText}>
-                <span className={s.badge}>În colaborare cu San Marco</span>
-                <h1>Riflaje și finisaje de interior, gata de montaj.</h1>
-                <p>Panouri riflate, tencuieli decorative și vopsele San Marco, plus tot ce îți trebuie pentru montaj — comandate online, livrate la șantier.</p>
-                <div className={s.actions}>
-                  <Link to={catUrl('riflaje')} className={s.btnGold}>Vezi riflajele</Link>
-                  <Link to={catUrl('sanmarco')} className={s.btnGhost}>Colecția San Marco</Link>
-                </div>
-              </div>
-              <div className={s.heroArt}>
-                <div className={`sw hero-panel ${s.tall}`} />
-                <div className="sw sw-black" />
-                <div className="sw sw-marmo" />
-                <div className={`sw sw-cadoro ${s.wide}`} />
+      <section className={s.hero}>
+        <div className={`container ${s.heroInner}`}>
+          <div className={s.heroText}>
+            <span className={s.badge}>În colaborare cu San Marco</span>
+            <h1>Riflaje și finisaje de interior, gata de montaj.</h1>
+            <p>Panouri riflate, tencuieli decorative și vopsele San Marco, plus tot ce îți trebuie pentru montaj — comandate online, livrate la șantier.</p>
+            <div className={s.actions}>
+              <Link to={catUrl('riflaje')} className={s.btnGold}>Vezi riflajele</Link>
+              <Link to={catUrl('sanmarco')} className={s.btnGhost}>Colecția San Marco</Link>
+            </div>
+          </div>
+          <div className={s.heroArt}>
+            <div className={`sw hero-panel ${s.tall}`} />
+            <div className="sw sw-black" />
+            <div className="sw sw-marmo" />
+            <div className={`sw sw-cadoro ${s.wide}`} />
+          </div>
+        </div>
+      </section>
+
+      <section className={s.benefits}>
+        <div className={`container ${s.benefitsRow}`}>
+          {benefits.map((b) => (
+            <div key={b.title} className={s.benefit}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{b.icon}</svg>
+              <div>
+                <div className={s.benefitTitle}>{b.title}</div>
+                <div className={s.benefitText}>{b.text}</div>
               </div>
             </div>
-          </section>
-          <section className={s.benefits}>
-            <div className={`container ${s.benefitsRow}`}>
-              {benefits.map((b) => (
-                <div key={b.title} className={s.benefit}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{b.icon}</svg>
-                  <div>
-                    <div className={s.benefitTitle}>{b.title}</div>
-                    <div className={s.benefitText}>{b.text}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </>
-      )}
+          ))}
+        </div>
+      </section>
 
       <section className={`container ${s.catalog}`}>
         <Filters cat={cat} fin={fin} stock={stock} fav={fav} set={set} reset={reset} />
@@ -154,60 +150,56 @@ export default function Shop() {
         </div>
       </section>
 
-      {showHero && (
-        <>
-          <section className={s.band}>
-            <div className={`container ${s.stepsInner}`}>
-              <h2 className={s.h2}>De la idee la perete, în 4 pași</h2>
-              <div className={s.stepsGrid}>
-                {steps.map((st) => (
-                  <div key={st.n} className={s.step}>
-                    <span className={s.stepNo}>{st.n}</span>
-                    <strong>{st.title}</strong>
-                    <span className={s.stepText}>{st.text}</span>
-                  </div>
-                ))}
+      <section className={s.band}>
+        <div className={`container ${s.stepsInner}`}>
+          <h2 className={s.h2}>De la idee la perete, în 4 pași</h2>
+          <div className={s.stepsGrid}>
+            {steps.map((st) => (
+              <div key={st.n} className={s.step}>
+                <span className={s.stepNo}>{st.n}</span>
+                <strong>{st.title}</strong>
+                <span className={s.stepText}>{st.text}</span>
               </div>
-            </div>
-          </section>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <section className={s.sanmarco}>
-            <div className={`container ${s.smInner}`}>
-              <div className={`sw sw-marmo ${s.smArt}`} />
-              <div className={s.smText}>
-                <div className={s.eyebrow}>Roxideal × San Marco</div>
-                <h2 className={`${s.h2} ${s.tight}`}>Finisaje decorative italiene, alese împreună cu tine.</h2>
-                <p>Tencuieli decorative și vopsele de interior San Marco, cu recomandări de nuanță și consum calculate pentru suprafața ta.</p>
-                <div className={s.actions}>
-                  <Link to={catUrl('sanmarco')} className={s.btnDark}>Vezi produsele San Marco</Link>
-                  <a href="#consultanta" className={s.btnOutline}>Cere consultanță</a>
-                </div>
-              </div>
+      <section className={s.sanmarco}>
+        <div className={`container ${s.smInner}`}>
+          <div className={`sw sw-marmo ${s.smArt}`} />
+          <div className={s.smText}>
+            <div className={s.eyebrow}>Roxideal × San Marco</div>
+            <h2 className={`${s.h2} ${s.tight}`}>Finisaje decorative italiene, alese împreună cu tine.</h2>
+            <p>Tencuieli decorative și vopsele de interior San Marco, cu recomandări de nuanță și consum calculate pentru suprafața ta.</p>
+            <div className={s.actions}>
+              <Link to={catUrl('sanmarco')} className={s.btnDark}>Vezi produsele San Marco</Link>
+              <a href="#consultanta" className={s.btnOutline}>Cere consultanță</a>
             </div>
-          </section>
+          </div>
+        </div>
+      </section>
 
-          <section id="proiecte" className={`container ${s.projects}`}>
-            <div className={s.toolbar}>
-              <div>
-                <div className={s.eyebrow}>Montate de Roxid Montaje</div>
-                <h2 className={`${s.h2} ${s.under}`}>Proiecte realizate</h2>
-              </div>
-              <a href="#proiecte-toate" className={s.more}>Vezi toate proiectele →</a>
-            </div>
-            <div className={s.projectsGrid}>
-              {projects.map((pr) => (
-                <figure key={pr.cls} className={s.project}>
-                  <div className={`sw ${pr.cls}`} />
-                  <figcaption>
-                    <strong>[NUME PROIECT]</strong><br />
-                    <span>{pr.text}</span>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-        </>
-      )}
+      <section id="proiecte" className={`container ${s.projects}`}>
+        <div className={s.toolbar}>
+          <div>
+            <div className={s.eyebrow}>Montate de Roxid Montaje</div>
+            <h2 className={`${s.h2} ${s.under}`}>Proiecte realizate</h2>
+          </div>
+          <a href="#proiecte-toate" className={s.more}>Vezi toate proiectele →</a>
+        </div>
+        <div className={s.projectsGrid}>
+          {projects.map((pr) => (
+            <figure key={pr.cls} className={s.project}>
+              <div className={`sw ${pr.cls}`} />
+              <figcaption>
+                <strong>[NUME PROIECT]</strong><br />
+                <span>{pr.text}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
