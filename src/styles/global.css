@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+a { color: var(--ink); }
+a:where(:hover) { color: var(--brown); }
+
+button, input, select, textarea { font: inherit; }
+
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.sw { position: relative; overflow: hidden; }
+.sw::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(0,0,0,.12)); }
+.sw-oak { background: repeating-linear-gradient(90deg, #C49A6C 0 22px, #A97E54 22px 24px, #8A6242 24px 28px), #C49A6C; }
+.sw-walnut { background: repeating-linear-gradient(90deg, #6B4630 0 22px, #55361F 22px 24px, #3A2518 24px 28px), #6B4630; }
+.sw-black { background: repeating-linear-gradient(90deg, #2A2D31 0 20px, #1A1C1F 20px 22px, #0D0E10 22px 28px), #2A2D31; }
+.sw-white { background: repeating-linear-gradient(90deg, #F1EFEA 0 22px, #DCD9D2 22px 24px, #C9C5BC 24px 28px), #F1EFEA; }
+.sw-grey { background: repeating-linear-gradient(90deg, #5B6067 0 22px, #4A4F55 22px 24px, #363A3F 24px 28px), #5B6067; }
+.sw-oakfelt { background: linear-gradient(#1B1C1E, #1B1C1E) bottom/100% 0 no-repeat, repeating-linear-gradient(90deg, #C49A6C 0 18px, #141517 18px 26px), #C49A6C; }
+.sw-marmo { background: radial-gradient(ellipse at 20% 30%, #EFECE6 0, transparent 45%), radial-gradient(ellipse at 75% 70%, #C9C3B8 0, transparent 50%), radial-gradient(ellipse at 60% 20%, #DAD5CC 0, transparent 40%), #D3CEC5; }
+.sw-cadoro { background: radial-gradient(ellipse at 30% 40%, #E6D3B0 0, transparent 50%), radial-gradient(ellipse at 80% 75%, #B89868 0, transparent 55%), linear-gradient(135deg, #D9C29A, #A88757); }
+.sw-paint { background: linear-gradient(180deg, #ECE7DD 0 62%, #D8CFC0 62% 100%); }
+.sw-primer { background: linear-gradient(180deg, #F3F1EC 0 50%, #E3DED4 50% 100%); }
+.sw-profile { background: repeating-linear-gradient(90deg, #E8E5DF 0 46px, #141619 46px 52px), #E8E5DF; }
+.sw-glue { background: linear-gradient(160deg, #E4E2DD, #C7C4BD); }
+.sw-clips { background: radial-gradient(circle, #8E949A 0 5px, transparent 6px) 0 0/28px 28px, #DCDAD5; }
+.hero-panel { background: repeating-linear-gradient(90deg, #C49A6C 0 30px, #A97E54 30px 33px, #7A5538 33px 40px), #C49A6C; }
