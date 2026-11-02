@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ShopProvider } from './ShopContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Shop from './pages/Shop';
 
 export default function App() {
   return (
@@ -9,7 +10,7 @@ export default function App() {
       <ShopProvider>
         <Header />
         <Routes>
-          <Route path="/" element={<main />} />
+          <Route path="/" element={<Shop />} />
         </Routes>
         <Footer />
       </ShopProvider>
