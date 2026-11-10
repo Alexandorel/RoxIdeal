@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { categories, catUrl } from '../data/mock';
+import { catUrl } from '../data/mock';
 import { useShop } from '../ShopContext';
 import logo from '../assets/logo.jpg';
 import s from './Header.module.css';
@@ -8,7 +8,7 @@ export default function Header() {
   const { pathname } = useLocation();
   const [params] = useSearchParams();
   const navigate = useNavigate();
-  const { favs } = useShop();
+  const { favs, categories } = useShop();
   const cat = params.get('cat') || 'toate';
   const favCount = Object.keys(favs).length;
   const cartCount = 0;

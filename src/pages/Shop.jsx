@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import Filters from '../components/Filters';
 import ProductCard from '../components/ProductCard';
-import { categories, catUrl, finishes, products } from '../data/mock';
+import { catUrl, finishes } from '../data/mock';
 import { useShop } from '../ShopContext';
 import s from './Shop.module.css';
 
@@ -35,7 +35,7 @@ const norm = (t) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 export default function Shop() {
   const [params, setParams] = useSearchParams();
-  const { favs } = useShop();
+  const { favs, products, categories, status } = useShop();
   const cat = params.get('cat') || 'toate';
   const q = (params.get('q') || '').trim();
   const finRaw = (params.get('fin') || '').split(',');
@@ -137,7 +137,19 @@ export default function Shop() {
             </div>
           )}
 
-          {list.length === 0 && (
+          {status === 'loading' && (
+            <div className={s.empty} role="status">
+              <div className={s.emptyTitle}>Se încarcă produsele…</div>
+            </div>
+          )}
+
+          {status === 'error' && (
+            <div className={s.empty} role="status">
+              <div className={s.emptyTitle}>Nu am putut încărca produsele. Încearcă din nou mai târziu.</div>
+            </div>
+          )}
+
+          {status === 'ready' && list.length === 0 && (
             <div className={s.empty}>
               <div className={s.emptyTitle}>Niciun produs nu se potrivește filtrelor.</div>
               <button type="button" className={s.btnDarkSm} onClick={reset}>Resetează filtrele</button>
