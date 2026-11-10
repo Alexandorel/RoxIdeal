@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
-import { categories, catUrl } from '../data/mock';
+import { catUrl } from '../data/mock';
+import { useShop } from '../ShopContext';
 import s from './Footer.module.css';
 
 export default function Footer() {
+  const { categories } = useShop();
   return (
     <footer className={s.footer}>
       <div className={`container ${s.grid}`}>
