@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import Filters from '../components/Filters';
 import ProductCard from '../components/ProductCard';
-import { catUrl, finishes } from '../data/mock';
+import { catUrl } from '../format';
 import { useShop } from '../ShopContext';
 import s from './Shop.module.css';
 
@@ -35,7 +35,7 @@ const norm = (t) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 export default function Shop() {
   const [params, setParams] = useSearchParams();
-  const { favs, products, categories, status } = useShop();
+  const { favs, products, categories, finishes, status } = useShop();
   const cat = params.get('cat') || 'toate';
   const q = (params.get('q') || '').trim();
   const finRaw = (params.get('fin') || '').split(',');

@@ -1,9 +1,8 @@
-import { finishes } from '../data/mock';
 import { useShop } from '../ShopContext';
 import s from './Filters.module.css';
 
 export default function Filters({ cat, fin, stock, fav, set, reset }) {
-  const { products, categories } = useShop();
+  const { products, categories, finishes } = useShop();
   const count = (id) => (id === 'toate' ? products.length : products.filter((p) => p.cat === id).length);
   const toggleFin = (id) => set('fin', (fin.includes(id) ? fin.filter((x) => x !== id) : [...fin, id]).join(','));
 

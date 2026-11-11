@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { catUrl } from '../data/mock';
+import { catUrl } from '../format';
 import { useShop } from '../ShopContext';
 import s from './Footer.module.css';
 

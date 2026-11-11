@@ -12,7 +12,8 @@ const load = (key) => {
 
 const all = { id: 'toate', label: 'Toate produsele', title: 'Toate produsele' };
 const toCategory = (c) => ({ id: c.slug, label: c.name, title: c.title });
-const toProduct = (p) => ({ ...p, cat: p.category?.slug, stock: p.stock > 0, cls: p.swatch, unit: p.unit?.toLowerCase() });
+const toFinish = (f) => ({ id: f.slug, label: f.name, cls: f.swatch });
+const toProduct = (p) => ({ ...p, cat: p.category?.slug, finish: p.finish?.slug, stock: p.stock > 0, cls: p.swatch, unit: p.unit?.toLowerCase() });
 const byId = (a, b) => a.id - b.id;
 
 const getJson = (url) => fetch(url).then((r) => {
@@ -24,6 +25,7 @@ export function ShopProvider({ children }) {
   const [favs, setFavs] = useState(() => load('favs'));
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([all]);
+  const [finishes, setFinishes] = useState([]);
   const [status, setStatus] = useState('loading');
 
   useEffect(() => {
@@ -31,10 +33,11 @@ export function ShopProvider({ children }) {
   }, [favs]);
 
   useEffect(() => {
-    Promise.all([getJson('/api/products'), getJson('/api/categories')])
-      .then(([ps, cs]) => {
+    Promise.all([getJson('/api/products'), getJson('/api/categories'), getJson('/api/finishes')])
+      .then(([ps, cs, fs]) => {
         setProducts(ps.sort(byId).map(toProduct));
         setCategories([all, ...cs.sort(byId).map(toCategory)]);
+        setFinishes(fs.sort(byId).map(toFinish));
         setStatus('ready');
       })
       .catch(() => setStatus('error'));
@@ -48,7 +51,7 @@ export function ShopProvider({ children }) {
   });
 
   return (
-    <ShopContext.Provider value={{ favs, toggleFav, products, categories, status }}>
+    <ShopContext.Provider value={{ favs, toggleFav, products, categories, finishes, status }}>
       {children}
     </ShopContext.Provider>
   );
