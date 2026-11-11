@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { catUrl } from '../data/mock';
+import { catUrl } from '../format';
 import { useShop } from '../ShopContext';
 import logo from '../assets/logo.jpg';
 import s from './Header.module.css';
