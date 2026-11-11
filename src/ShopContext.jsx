@@ -33,10 +33,11 @@ export function ShopProvider({ children }) {
   }, [favs]);
 
   useEffect(() => {
-    Promise.all([getJson('/api/products'), getJson('/api/categories')])
-      .then(([ps, cs]) => {
+    Promise.all([getJson('/api/products'), getJson('/api/categories'), getJson('/api/finishes')])
+      .then(([ps, cs, fs]) => {
         setProducts(ps.sort(byId).map(toProduct));
         setCategories([all, ...cs.sort(byId).map(toCategory)]);
+        setFinishes(fs.sort(byId).map(toFinish));
         setStatus('ready');
       })
       .catch(() => setStatus('error'));
@@ -50,7 +51,7 @@ export function ShopProvider({ children }) {
   });
 
   return (
-    <ShopContext.Provider value={{ favs, toggleFav, products, categories, status }}>
+    <ShopContext.Provider value={{ favs, toggleFav, products, categories, finishes, status }}>
       {children}
     </ShopContext.Provider>
   );
