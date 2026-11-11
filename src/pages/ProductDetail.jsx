@@ -1,23 +1,40 @@
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { catUrl, money } from '../format';
-import { useShop } from '../ShopContext';
+import { getJson, toProduct, useShop } from '../ShopContext';
 import s from './ProductDetail.module.css';
+
+const messages = {
+  loading: 'Se încarcă produsul…',
+  missing: 'Produsul nu există.',
+  error: 'Nu am putut încărca produsul. Încearcă din nou mai târziu.',
+};
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const { favs, toggleFav, products, finishes, status } = useShop();
-  const p = products.find((x) => x.id === Number(id));
+  const { favs, toggleFav, finishes } = useShop();
+  const [p, setP] = useState(null);
+  const [status, setStatus] = useState('loading');
 
-  if (status !== 'ready' || !p) {
-    const msg = {
-      loading: 'Se încarcă produsul…',
-      error: 'Nu am putut încărca produsul. Încearcă din nou mai târziu.',
-    }[status] || 'Produsul nu există.';
+  useEffect(() => {
+    let alive = true;
+    setStatus('loading');
+    getJson(`/api/products/${id}`)
+      .then((data) => {
+        if (!alive) return;
+        setP(toProduct(data));
+        setStatus('ready');
+      })
+      .catch((e) => alive && setStatus(e.message === '404' ? 'missing' : 'error'));
+    return () => { alive = false; };
+  }, [id]);
+
+  if (status !== 'ready') {
     return (
       <main className={`container ${s.page}`}>
         <div className={s.empty} role="status">
-          <div className={s.emptyTitle}>{msg}</div>
-          {status === 'ready' && <Link to="/" className={s.back}>← Înapoi la catalog</Link>}
+          <div className={s.emptyTitle}>{messages[status]}</div>
+          {status === 'missing' && <Link to="/" className={s.back}>← Înapoi la catalog</Link>}
         </div>
       </main>
     );
